@@ -1,7 +1,9 @@
-import { MovieCard } from "@/components/my/Moviecard";
+import { MovieCard, NowPlaying, Header } from "@/components/my";
 export default function Home() {
   return (
     <div>
+      <Header />
+      <NowPlaying />
       <MovieCard
         title="Dark Knight"
         image="https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_FMjpg_UX1000_.jpg"

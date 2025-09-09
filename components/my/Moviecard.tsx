@@ -34,7 +34,7 @@ export const MovieCard = ({ title, image, score }: MovieCardProps) => {
                   fill="#FDE047"
                   stroke="#FDE047"
                   strokeLinecap="round"
-                  stroke-linejoin="round"
+                  strokeLinejoin="round"
                 />
               </svg>
               <span className="text-foreground">{score}</span>/10
