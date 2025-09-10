@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react";
 
 import {
   NavigationMenu,
@@ -13,6 +12,9 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+
+import { Badge } from "@/components/ui/badge";
+import { ChevronRight } from "lucide-react";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -53,36 +55,65 @@ const components: { title: string; href: string; description: string }[] = [
 ];
 
 export function NavigationMenuDemo() {
+  const Genres = [
+    { title: "Action" },
+    { title: "Adventure" },
+    { title: "Animation" },
+    { title: "Biography" },
+    { title: "Comedy" },
+    { title: "Crime" },
+    { title: "Documentary" },
+    { title: "Drama" },
+    { title: "Family" },
+    { title: "Fantasy" },
+    { title: "Film-Noir" },
+    { title: "Game-Show" },
+    { title: "History" },
+    { title: "Horror" },
+    { title: "Music" },
+    { title: "Musical" },
+    { title: "Mystery" },
+    { title: "News" },
+    { title: "Reality-TV" },
+    { title: "Romance" },
+    { title: "Sci-Fi" },
+    { title: "Short" },
+    { title: "Sport" },
+    { title: "Talk-Show" },
+    { title: "Thriller" },
+    { title: "War" },
+    { title: "Western" },
+  ];
   return (
-    <NavigationMenu viewport={false}>
+    <NavigationMenu viewport={true}>
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Genre</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
+            <div className="flex flex-col items-start w-[577px] p-5">
+              <div className="row-span-3">
                 <NavigationMenuLink asChild>
-                  <a
-                    className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
-                    href="/"
-                  >
-                    <div className="mt-4 mb-2 text-lg font-medium">
-                      shadcn/ui
+                  <a className="" href="/">
+                    <div className="text-foreground text-2xl leading-8 font-semibold">
+                      Genres
                     </div>
-                    <p className="text-muted-foreground text-sm leading-tight">
-                      Beautifully designed components built with Tailwind CSS.
+                    <p className="text-foreground text-base leading-6 font-normal">
+                      See lists of movies by genre
                     </p>
                   </a>
                 </NavigationMenuLink>
-              </li>
-              <ListItem href="/docs" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
-              </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
-                How to install dependencies and structure your app.
-              </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Typography">
-                Styles for headings, paragraphs, lists...etc
+              </div>
+            </div>
+            <ul className="flex items-start content-start gap-4 self-stretch flex-wrap">
+              <ListItem href="">
+                {Genres.map((item, index) => (
+                  <Badge variant="outline" className="flex gap-2" key={index}>
+                    <span className="text-foreground text-xs leading-4 font-semibold">
+                      {item.title}
+                    </span>
+                    <ChevronRight className="w-4 h-4" />
+                  </Badge>
+                ))}
               </ListItem>
             </ul>
           </NavigationMenuContent>
