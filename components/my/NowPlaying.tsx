@@ -53,8 +53,7 @@ export function NowPlaying() {
       plugins={[plugin.current]}
       className="max-w-[1440px] h-[600px] flex self-stretch"
       onMouseEnter={plugin.current.stop}
-      onMouseLeave={plugin.current.reset}
-    >
+      onMouseLeave={plugin.current.reset}>
       <CarouselContent>
         {Images.map((item, index) => (
           <CarouselItem key={index}>
@@ -62,8 +61,7 @@ export function NowPlaying() {
               <Card className="p-0 border-0 rounded-none">
                 <CardContent
                   className="flex items-center justify-center w-[1440px] h-[600px] rounded-xl bg-cover bg-center relative "
-                  style={{ backgroundImage: `url(${item.image})` }}
-                >
+                  style={{ backgroundImage: `url(${item.image})` }}>
                   <div className="flex flex-col gap-4 w-101 absolute left-[140px] bottom-[158px]">
                     <div>
                       <span className="text-white leading-6 font-normal text-base">
@@ -78,8 +76,8 @@ export function NowPlaying() {
                       {item.desc}
                     </div>
                     <button className="bg-[#F4F4F5] border rounded-md h-10 px-4 py-2 w-[145px] flex gap-2 justify-center items-center">
-                      <Play className="w-4 h-4" />
-                      <span className="text-secondary-foreground leading-5 text-sm">
+                      <Play className="w-4 h-4 text-black" />
+                      <span className="text-black leading-5 text-sm">
                         Watch Trailer
                       </span>
                     </button>

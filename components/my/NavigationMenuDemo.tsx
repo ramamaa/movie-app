@@ -15,6 +15,7 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { ChevronRight } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -90,7 +91,7 @@ export function NavigationMenuDemo() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Genre</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="flex flex-col items-start w-[577px] p-5">
+            <div className=" w-[577px] p-5 flex items-start content-start gap-4 self-stretch flex-wrap">
               <div className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a className="" href="/">
@@ -104,17 +105,24 @@ export function NavigationMenuDemo() {
                 </NavigationMenuLink>
               </div>
             </div>
-            <ul className="flex items-start content-start gap-4 self-stretch flex-wrap">
-              <ListItem href="">
-                {Genres.map((item, index) => (
-                  <Badge variant="outline" className="flex gap-2" key={index}>
-                    <span className="text-foreground text-xs leading-4 font-semibold">
-                      {item.title}
-                    </span>
-                    <ChevronRight className="w-4 h-4" />
-                  </Badge>
-                ))}
-              </ListItem>
+            <Separator className="w-[537px] px-5" />
+            <ul className="flex items-start content-start gap-4 self-stretch flex-wrap w-[537px] p-5">
+              {Genres.map((item, index) => (
+                <li key={index}>
+                  <NavigationMenuLink asChild>
+                    <Link href={`/genre/${item.title.toLowerCase()}`}>
+                      <Badge
+                        variant="outline"
+                        className="flex gap-2 cursor-pointer">
+                        <span className="text-foreground text-xs leading-4 font-semibold">
+                          {item.title}
+                        </span>
+                        <ChevronRight className="w-4 h-4" />
+                      </Badge>
+                    </Link>
+                  </NavigationMenuLink>
+                </li>
+              ))}
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
