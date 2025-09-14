@@ -27,16 +27,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[1440px] m-auto`}
-      >
-        <Header />
+        className={`${geistSans.variable} ${geistMono.variable} antialiased w-full  max-w-[1440px] mx-auto`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
-        >
-          {children}
+          disableTransitionOnChange>
+          <Header />
+          <main className="w-full">{children}</main>
         </ThemeProvider>
       </body>
     </html>
