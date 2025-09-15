@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import Link from "next/link";
 
@@ -16,6 +14,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { ChevronRight } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { getMovieGenres } from "@/utils/get-data";
+import { genresResponseType } from "@/types";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -55,36 +55,10 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ];
 
-export function NavigationMenuDemo() {
-  const Genres = [
-    { title: "Action" },
-    { title: "Adventure" },
-    { title: "Animation" },
-    { title: "Biography" },
-    { title: "Comedy" },
-    { title: "Crime" },
-    { title: "Documentary" },
-    { title: "Drama" },
-    { title: "Family" },
-    { title: "Fantasy" },
-    { title: "Film-Noir" },
-    { title: "Game-Show" },
-    { title: "History" },
-    { title: "Horror" },
-    { title: "Music" },
-    { title: "Musical" },
-    { title: "Mystery" },
-    { title: "News" },
-    { title: "Reality-TV" },
-    { title: "Romance" },
-    { title: "Sci-Fi" },
-    { title: "Short" },
-    { title: "Sport" },
-    { title: "Talk-Show" },
-    { title: "Thriller" },
-    { title: "War" },
-    { title: "Western" },
-  ];
+export async function NavigationMenuDemo() {
+  const genresResponse: genresResponseType = await getMovieGenres();
+  console.log(genresResponse, "RESPONSE");
+
   return (
     <NavigationMenu viewport={true}>
       <NavigationMenuList>
@@ -107,15 +81,16 @@ export function NavigationMenuDemo() {
             </div>
             <Separator className="w-[537px] px-5" />
             <ul className="flex items-start content-start gap-4 self-stretch flex-wrap w-[537px] p-5">
-              {Genres.map((item, index) => (
-                <li key={index}>
+              {genresResponse.genres.map((genre) => (
+                <li key={genre.id}>
                   <NavigationMenuLink asChild>
-                    <Link href={`/genre/${item.title.toLowerCase()}`}>
+                    <Link href={`/genre?id=${genre.id}`}>
                       <Badge
                         variant="outline"
-                        className="flex gap-2 cursor-pointer">
+                        className="flex gap-2 cursor-pointer"
+                      >
                         <span className="text-foreground text-xs leading-4 font-semibold">
-                          {item.title}
+                          {genre.name}
                         </span>
                         <ChevronRight className="w-4 h-4" />
                       </Badge>
@@ -149,4 +124,7 @@ function ListItem({
       </NavigationMenuLink>
     </li>
   );
+}
+function getMoviesGenres() {
+  throw new Error("Function not implemented.");
 }

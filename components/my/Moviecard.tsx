@@ -20,8 +20,9 @@ export const MovieCard = ({ title, score, image }: MovieCardProps) => {
   return (
     <Link href="/detail">
       <Card className="w-[230px] bg-secondary p-0 overflow-hidden gap-2">
-        <CardContent className="p-0">
+        <CardContent className="p-0 object-cover">
           <Image
+            className="object-cover"
             src={`https://image.tmdb.org/t/p/w500/${image}`}
             alt=""
             width={230}

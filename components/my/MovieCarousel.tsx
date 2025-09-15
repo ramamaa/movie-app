@@ -43,19 +43,23 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
 
   return (
     <>
-      <Carousel setApi={setApi} plugins={[autoplay.current]} className="">
-        <CarouselContent>
+      <Carousel
+        setApi={setApi}
+        plugins={[autoplay.current]}
+        className="relative p-0 rounded-none"
+      >
+        <CarouselContent className="p-0 rounded-none">
           {movies.slice(0, 3).map((movie, index) => (
             <CarouselItem key={index}>
               <div className="p-1">
-                <Card>
-                  <CardContent className="relative flex aspect-video max-h-[600px] items-center justify-center p-0">
+                <Card className="rounded-none p-0">
+                  <CardContent className="relative flex aspect-video max-h-[600px] items-center justify-center p-0 rounded-none">
                     <Image
                       src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                       alt={movie.title}
                       width={1440}
                       height={600}
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-cover "
                       priority={index === 0}
                       unoptimized
                     />
@@ -94,13 +98,13 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
       </Carousel>
 
       {/* indicators */}
-      <div className="flex gap-2 justify-center mt-4">
+      <div className="relative flex gap-2 justify-center mt-[-50px]">
         {Array.from({ length: 3 }).map((_, index) => (
           <div
             key={index}
             onClick={() => api?.scrollTo(index)}
             className={`rounded-full size-4 cursor-pointer ${
-              index + 1 === current ? "bg-white" : "bg-gray-600"
+              index + 1 === current ? "bg-white" : "bg-white opacity-80"
             }`}
           />
         ))}

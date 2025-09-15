@@ -15,7 +15,7 @@ export default async function Home() {
   console.log(upcomingMovies);
 
   return (
-    <div>
+    <div className=" max-w-[1440px] mx-auto">
       <MovieCarousel movies={nowPlayingMovies.results} />
       <MovieContainer movies={upcomingMovies.results} title="Upcoming" />
       <MovieContainer movies={popularMovies.results} title="Popular" />
