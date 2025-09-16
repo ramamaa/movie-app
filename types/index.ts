@@ -25,3 +25,19 @@ export type GenreType = {
 export type genresResponseType = {
   genres: GenreType[];
 };
+
+export type movieDetailType = {
+  genres: GenreType[];
+  title: string;
+  release_date: string;
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  overview: string;
+  poster_path: string;
+  vote_average: number;
+  popularity: number;
+  runtime: number;
+};

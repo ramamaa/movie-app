@@ -84,7 +84,7 @@ export async function NavigationMenuDemo() {
               {genresResponse.genres.map((genre) => (
                 <li key={genre.id}>
                   <NavigationMenuLink asChild>
-                    <Link href={`/genre?id=${genre.id}`}>
+                    <Link href={`/genre?id=${genre.id}&name=${genre.name}`}>
                       <Badge
                         variant="outline"
                         className="flex gap-2 cursor-pointer"

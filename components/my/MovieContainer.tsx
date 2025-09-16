@@ -14,6 +14,7 @@ export const MovieContainer = ({ movies, title }: MovieContainerProps) => {
       <div className="flex gap-8 flex-wrap px-20 mt-9">
         {movies.slice(0, 10).map((movie) => (
           <MovieCard
+            id={movie.id}
             key={movie.id}
             title={movie.title}
             score={movie.vote_average}

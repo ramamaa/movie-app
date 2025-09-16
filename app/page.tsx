@@ -1,25 +1,11 @@
-import { MovieCarousel } from "@/components/my";
-import { MovieContainer } from "@/components/my/MovieContainer";
+import HomePage from "@/components/main/HomePage";
+import { HomePageSkeleton } from "@/components/main/HomePageSkeleton";
+import { Suspense } from "react";
 
-import { movieResponseType } from "@/types";
-import { getMoviesList } from "@/utils/get-data";
-
-export default async function Home() {
-  const upcomingMovies: movieResponseType = await getMoviesList("upcoming");
-  const popularMovies: movieResponseType = await getMoviesList("popular");
-  const topRatedMovies: movieResponseType = await getMoviesList("top_rated");
-  const nowPlayingMovies: movieResponseType = await getMoviesList(
-    "now_playing"
-  );
-
-  console.log(upcomingMovies);
-
+export default function Home() {
   return (
-    <div className=" max-w-[1440px] mx-auto">
-      <MovieCarousel movies={nowPlayingMovies.results} />
-      <MovieContainer movies={upcomingMovies.results} title="Upcoming" />
-      <MovieContainer movies={popularMovies.results} title="Popular" />
-      <MovieContainer movies={topRatedMovies.results} title="Top Rated" />
-    </div>
+    <Suspense fallback={<HomePageSkeleton />}>
+      <HomePage />
+    </Suspense>
   );
 }

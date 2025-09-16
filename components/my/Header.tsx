@@ -5,8 +5,12 @@ export const Header = () => {
   return (
     <div className="flex justify-between items-center px-20 py-5">
       <div className="flex gap-2">
-        <Film className="w-5 h-5 text-indigo-700" />
-        <span className="text-indigo-700 text-base font-bold">Movie Z</span>
+        <a href="/">
+          <Film className="w-5 h-5 text-indigo-700" />
+        </a>
+        <a className="text-indigo-700 text-base font-bold" href="/">
+          Movie Z
+        </a>
       </div>
       <div className="flex gap-3 ">
         <NavigationMenuDemo />
