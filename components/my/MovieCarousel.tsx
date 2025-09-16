@@ -46,8 +46,7 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
       <Carousel
         setApi={setApi}
         plugins={[autoplay.current]}
-        className="relative p-0 rounded-none"
-      >
+        className="relative p-0 rounded-none">
         <CarouselContent className="p-0 rounded-none">
           {movies.slice(0, 3).map((movie, index) => (
             <CarouselItem key={index}>
@@ -74,7 +73,7 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
                           {movie.title}
                         </h1>
                         <span className="text-white">
-                          ⭐️ {movie.vote_average}/10
+                          ⭐️ {movie.vote_average.toFixed(1)}/10
                         </span>
                       </div>
                       <div className="text-white text-xs font-normal leading-4 max-w-[500px]">

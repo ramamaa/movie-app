@@ -41,3 +41,34 @@ export type movieDetailType = {
   popularity: number;
   runtime: number;
 };
+export type movieDetailActorsType = {
+  id: number;
+  cast: CastType[];
+  crew: CrewType[];
+};
+export type CastType = {
+  adult: boolean;
+  name: string;
+  character: string;
+  known_for_department: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
+  order: number;
+  id: number;
+  credit_id: string;
+};
+export type CrewType = {
+  adult: boolean;
+  name: string;
+  character: string;
+  known_for_department: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
+  order: number;
+  id: number;
+  credit_id: string;
+  department: string;
+  job: string;
+};

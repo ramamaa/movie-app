@@ -35,7 +35,7 @@ export const MovieCard = ({ title, score, image, id }: MovieCardProps) => {
           <CardDescription className="flex gap-2">
             <Star color="#FDE047" />
             <p className="text-muted-foreground">
-              <span className="text-foreground">{score}</span>/10
+              <span className="text-foreground">{score.toFixed(1)}</span>/10
             </p>
           </CardDescription>
           <CardTitle>{title}</CardTitle>

@@ -56,3 +56,17 @@ export const getMovieDetail = async (movieId: string) => {
   const data = await res.json();
   return data;
 };
+export const getMovieDetailActors = async (id: string) => {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_ACCESS_KEY}`,
+      },
+    }
+  );
+  const data = await res.json();
+  return data;
+};
