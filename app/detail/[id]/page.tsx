@@ -3,7 +3,11 @@ import {
   movieDetailType,
   movieResponseType,
 } from "@/types";
-import { getMovieDetail, getMovieDetailActors, getSimilarMovie } from "@/utils/get-data";
+import {
+  getMovieDetail,
+  getMovieDetailActors,
+  getSimilarMovie,
+} from "@/utils/get-data";
 import { ChevronRight, Star } from "lucide-react";
 import React from "react";
 import Image from "next/image";
@@ -17,7 +21,8 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
   const dynamicParams = await params;
   const id = dynamicParams.id;
   const movieDetailResponse: movieDetailType = await getMovieDetail(id);
-  const similarMovie: movieResponseType= await getSimilarMovie(id);
+  const similarMovie: movieResponseType = await getSimilarMovie(id);
+
   const movieCreditsResponse: movieDetailActorsType =
     await getMovieDetailActors(id);
   console.log(movieCreditsResponse, "Movie Detail");
@@ -135,14 +140,24 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
             <Separator className="w-[1080px] border-[#27272A] " />
           </div>
           <div className="flex justify-between">
-            <span className="text-2xl font-semibold leading-8">More like this</span>
-            <a className="flex gap-2 text-sm text-foreground font-medium items-center px-4 leading-9" href="/">See more <ChevronRight className="w-4 h-4"/></a>
+            <span className="text-2xl font-semibold leading-8">
+              More like this
+            </span>
+            <a
+              className="flex gap-2 text-sm text-foreground font-medium items-center px-4 leading-9"
+              href="/">
+              See more <ChevronRight className="w-4 h-4" />
+            </a>
           </div>
           <div className="flex flex-wrap gap-8 ">
-            {similarMovie.results.slice(0,5).map ((movie)=>(
-              <MovieCard title={movie.title} score={movie.vote_average} image={movie.poster_path} id={movie.id} key={movie.id} className="w-[190px] ">
-
-              </MovieCard>
+            {similarMovie.results.slice(0, 5).map((movie) => (
+              <MovieCard
+                title={movie.title}
+                score={movie.vote_average}
+                image={movie.poster_path}
+                id={movie.id}
+                key={movie.id}
+                className="w-[190px] "></MovieCard>
             ))}
           </div>
         </div>

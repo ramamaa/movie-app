@@ -19,6 +19,7 @@ export const MovieContainer = ({ movies, title }: MovieContainerProps) => {
             title={movie.title}
             score={movie.vote_average}
             image={movie.poster_path}
+            className=""
           />
         ))}
       </div>
