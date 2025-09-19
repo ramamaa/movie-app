@@ -5,7 +5,7 @@ export const getMoviesList = async (listName: string) => {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization: `Bearer ${process.env.TMDB_ACCESS_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY}`,
       },
     }
   );
@@ -20,7 +20,7 @@ export const getMovieGenres = async () => {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization: `Bearer ${process.env.TMDB_ACCESS_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY}`,
       },
     }
   );
@@ -35,7 +35,7 @@ export const getMoviesByGenreId = async (genreIds: string) => {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization: `Bearer ${process.env.TMDB_ACCESS_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY}`,
       },
     }
   );
@@ -49,7 +49,7 @@ export const getMovieDetail = async (movieId: string) => {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization: `Bearer ${process.env.TMDB_ACCESS_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY}`,
       },
     }
   );
@@ -63,7 +63,7 @@ export const getMovieDetailActors = async (id: string) => {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization: `Bearer ${process.env.TMDB_ACCESS_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY}`,
       },
     }
   );
@@ -78,21 +78,21 @@ export const getSimilarMovie = async (id: string) => {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization: `Bearer ${process.env.TMDB_ACCESS_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY}`,
       },
     }
   );
   const data = await res.json();
   return data;
 };
-export const getMoviesVideo = async (id: string) => {
+export const getMoviesVideo = async (id: string | number) => {
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
     {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization: `Bearer ${process.env.TMDB_ACCESS_KEY}`,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY}`,
       },
     }
   );

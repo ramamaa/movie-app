@@ -15,6 +15,7 @@ import {
 import { movieResponseType, MovieType } from "@/types";
 import { Play } from "lucide-react";
 import TrailerPopover from "./TrailerPopover";
+import { getMoviesVideo } from "@/utils/get-data";
 
 type MovieCarouselProps = {
   movies: MovieType[];
@@ -47,52 +48,11 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
       <Carousel
         setApi={setApi}
         plugins={[autoplay.current]}
-        className="relative p-0 rounded-none">
+        className="relative p-0 rounded-none"
+      >
         <CarouselContent className="p-0 rounded-none">
           {movies.slice(0, 3).map((movie, index) => (
-            <CarouselItem key={index}>
-              <div className="p-1">
-                <Card className="rounded-none p-0">
-                  <CardContent className="relative flex aspect-video max-h-[600px] items-center justify-center p-0 rounded-none">
-                    <Image
-                      src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                      alt={movie.title}
-                      width={1440}
-                      height={600}
-                      className="w-full h-full object-cover "
-                      priority={index === 0}
-                      unoptimized
-                    />
-
-                    {/* overlay */}
-                    <div className="flex flex-col gap-4 w-101 absolute left-[140px] bottom-[158px]">
-                      <div>
-                        <span className="text-white leading-6 font-normal text-base">
-                          Now Playing:
-                        </span>
-                        <h1 className="text-white text-4xl font-bold leading-10">
-                          {movie.title}
-                        </h1>
-                        <span className="text-white">
-                          ⭐️ {movie.vote_average.toFixed(1)}/10
-                        </span>
-                      </div>
-                      <div className="text-white text-xs font-normal leading-4 max-w-[500px]">
-                        {movie.overview}
-                      </div>
-                      /*{" "}
-                      <button className="bg-[#F4F4F5] border rounded-md h-10 px-4 py-2 w-[145px] flex gap-2 justify-center items-center">
-                        <Play className="w-4 h-4 text-black" />
-                        <span className="text-black leading-5 text-sm">
-                          Watch Trailer
-                        </span>
-                      </button>
-                      {/* <TrailerPopover /> */}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
+            <MovieCarouselItem movie={movie} index={index} key={movie.id} />
           ))}
         </CarouselContent>
         <CarouselPrevious className="left-13" />
@@ -114,3 +74,68 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
     </>
   );
 }
+
+type MovieCarouselItemProps = {
+  movie: MovieType;
+  index: number;
+};
+
+const MovieCarouselItem = ({ movie, index }: MovieCarouselItemProps) => {
+  const [movieTrailer, setMovieTrailer] = React.useState("");
+
+  const getMovieTrailer = async () => {
+    const trailerData = await getMoviesVideo(movie.id);
+    console.log("trailer", trailerData);
+    setMovieTrailer(trailerData);
+  };
+
+  React.useEffect(() => {
+    getMovieTrailer();
+  }, []);
+
+  return (
+    <CarouselItem>
+      <div className="p-1">
+        <Card className="rounded-none p-0">
+          <CardContent className="relative flex aspect-video max-h-[600px] items-center justify-center p-0 rounded-none">
+            <Image
+              src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              alt={movie.title}
+              width={1440}
+              height={600}
+              className="w-full h-full object-cover "
+              priority={index === 0}
+              unoptimized
+            />
+
+            {/* overlay */}
+            <div className="flex flex-col gap-4 w-101 absolute left-[140px] bottom-[158px]">
+              <div>
+                <span className="text-white leading-6 font-normal text-base">
+                  Now Playing:
+                </span>
+                <h1 className="text-white text-4xl font-bold leading-10">
+                  {movie.title}
+                </h1>
+                <span className="text-white">
+                  ⭐️ {movie.vote_average.toFixed(1)}/10
+                </span>
+              </div>
+              <div className="text-white text-xs font-normal leading-4 max-w-[500px]">
+                {movie.overview}
+              </div>
+              /*{" "}
+              <button className="bg-[#F4F4F5] border rounded-md h-10 px-4 py-2 w-[145px] flex gap-2 justify-center items-center">
+                <Play className="w-4 h-4 text-black" />
+                <span className="text-black leading-5 text-sm">
+                  Watch Trailer
+                </span>
+              </button>
+              {/* <TrailerPopover /> */}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </CarouselItem>
+  );
+};

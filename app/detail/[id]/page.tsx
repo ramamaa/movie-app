@@ -88,7 +88,8 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
               <Badge
                 variant="outline"
                 className="flex gap-2 cursor-pointer"
-                key={genre.id}>
+                key={genre.id}
+              >
                 <p>{genre.name}</p>
               </Badge>
             ))}
@@ -133,7 +134,7 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
               </p>
               <div className="leading-6 text-base font-normal text-foreground flex gap-3">
                 {movieCreditsResponse.cast.slice(0, 3).map((actor) => (
-                  <p key={actor.credit_id}>{actor.name}</p>
+                  <p key={actor.credit_id}>{actor.name} ·</p>
                 ))}
               </div>
             </div>
@@ -145,7 +146,8 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
             </span>
             <a
               className="flex gap-2 text-sm text-foreground font-medium items-center px-4 leading-9"
-              href="/">
+              href="/"
+            >
               See more <ChevronRight className="w-4 h-4" />
             </a>
           </div>
@@ -157,7 +159,8 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
                 image={movie.poster_path}
                 id={movie.id}
                 key={movie.id}
-                className="w-[190px] "></MovieCard>
+                className="w-[190px] "
+              ></MovieCard>
             ))}
           </div>
         </div>
