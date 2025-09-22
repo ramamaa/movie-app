@@ -2,18 +2,30 @@ import {
   movieDetailActorsType,
   movieDetailType,
   movieResponseType,
+  TrailerResponseType,
 } from "@/types";
 import {
   getMovieDetail,
   getMovieDetailActors,
+  getMoviesVideo,
   getSimilarMovie,
 } from "@/utils/get-data";
-import { ChevronRight, Star } from "lucide-react";
+import { ChevronRight, CirclePlay, Play, Star } from "lucide-react";
 import React from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { MovieCard, MovieContainer } from "@/components/my";
+import { TrailerDialog } from "@/components/my/TrailerDialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 type DetailDynamicPageProps = {
   params: Promise<{ id: string }>;
 };
@@ -22,10 +34,11 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
   const id = dynamicParams.id;
   const movieDetailResponse: movieDetailType = await getMovieDetail(id);
   const similarMovie: movieResponseType = await getSimilarMovie(id);
-
+  const trailerData: TrailerResponseType = await getMoviesVideo(id);
+  const trailer = trailerData.results.find((item) => item.type === "Trailer");
   const movieCreditsResponse: movieDetailActorsType =
     await getMovieDetailActors(id);
-  console.log(movieCreditsResponse, "Movie Detail");
+  console.log(trailerData, "Trailer Detail");
   return (
     <div className="max-w-[1080px] mx-auto mt-13 mb-[113px] flex flex-col">
       <div className="flex flex-wrap justify-between  ">
@@ -49,7 +62,7 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
                 <p className="text-muted-foreground">/10</p>
               </span>
               <p className="text-muted-foreground text-xs leading-4 text-center">
-                {movieDetailResponse.popularity.toFixed(1)}
+                {movieDetailResponse.popularity.toFixed(1)}k
               </p>
             </div>
           </div>
@@ -77,9 +90,30 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1080px) 50vw, 33vw"
             />
-            <button className="absolute bottom-6 left-6 bg-white text-black px-4 py-2 rounded-md hover:bg-gray-200 transition">
-              Play Trailer
-            </button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <button className="absolute bottom-4 left-4 bg-transparent  text-white font-normal text-base leading-6 px-4 py-2 h-10 flex gap-3 items-center ">
+                  <div className="bg-white h-10 w-10 border border-white rounded-full flex justify-center items-center">
+                    <Play className="w-4 h-4 text-black" />
+                  </div>
+                  Play trailer
+                </button>
+              </DialogTrigger>
+              <DialogContent className="max-w-[997px] max-h-[561px] mx-auto p-0 flex justify-center items-center border-0 bg-transparent">
+                <DialogTitle className="hidden"></DialogTitle>
+                <DialogHeader>
+                  <iframe
+                    className="mx-auto flex justify-center items-center"
+                    width="997"
+                    height="561"
+                    src={`https://www.youtube.com/embed/${trailer?.key}`}
+                    title="d4vd - “Remember Me” (from Arcane Season 2) [Official Visualizer]"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
         <div className="flex flex-col gap-5">
@@ -88,8 +122,7 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
               <Badge
                 variant="outline"
                 className="flex gap-2 cursor-pointer"
-                key={genre.id}
-              >
+                key={genre.id}>
                 <p>{genre.name}</p>
               </Badge>
             ))}
@@ -146,8 +179,7 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
             </span>
             <a
               className="flex gap-2 text-sm text-foreground font-medium items-center px-4 leading-9"
-              href="/"
-            >
+              href="/">
               See more <ChevronRight className="w-4 h-4" />
             </a>
           </div>
@@ -159,8 +191,7 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
                 image={movie.poster_path}
                 id={movie.id}
                 key={movie.id}
-                className="w-[190px] "
-              ></MovieCard>
+                className="w-[190px] "></MovieCard>
             ))}
           </div>
         </div>

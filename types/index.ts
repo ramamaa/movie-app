@@ -72,3 +72,13 @@ export type CrewType = {
   department: string;
   job: string;
 };
+export type TrailerType = {
+  id: number | string;
+  key: string;
+  type: string;
+};
+
+export type TrailerResponseType = {
+  id: number;
+  results: TrailerType[];
+};
