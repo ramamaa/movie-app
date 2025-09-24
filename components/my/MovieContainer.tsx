@@ -3,13 +3,25 @@ import { MovieCard } from "./Moviecard";
 type MovieContainerProps = {
   movies: MovieType[];
   title: string;
+  listName: string;
 };
 
-export const MovieContainer = ({ movies, title }: MovieContainerProps) => {
+export const MovieContainer = ({
+  movies,
+  title,
+  listName,
+}: MovieContainerProps) => {
   return (
     <div>
-      <div className="text-foreground text-2xl font-semibold leading-8 pl-20 mt-13">
-        {title}
+      <div className="flex justify-between items-center">
+        <div className="text-foreground text-2xl font-semibold leading-8 pl-20 mt-13">
+          {title}
+        </div>
+        <a href={`/seemore?name=${listName}&title=${title}`}>
+          <button className="mt-13 pr-20 leading-5 text-sm font-medium ">
+            See more123
+          </button>
+        </a>
       </div>
       <div className="flex gap-8 flex-wrap px-20 mt-9">
         {movies.slice(0, 10).map((movie) => (

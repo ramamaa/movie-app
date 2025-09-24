@@ -122,7 +122,8 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
               <Badge
                 variant="outline"
                 className="flex gap-2 cursor-pointer"
-                key={genre.id}>
+                key={genre.id}
+              >
                 <p>{genre.name}</p>
               </Badge>
             ))}
@@ -179,11 +180,12 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
             </span>
             <a
               className="flex gap-2 text-sm text-foreground font-medium items-center px-4 leading-9"
-              href="/">
+              href="/"
+            >
               See more <ChevronRight className="w-4 h-4" />
             </a>
           </div>
-          <div className="flex flex-wrap gap-8 ">
+          <div className="flex flex-wrap gap-8 items-stretch">
             {similarMovie.results.slice(0, 5).map((movie) => (
               <MovieCard
                 title={movie.title}
@@ -191,7 +193,8 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
                 image={movie.poster_path}
                 id={movie.id}
                 key={movie.id}
-                className="w-[190px] "></MovieCard>
+                className="w-[190px] "
+              ></MovieCard>
             ))}
           </div>
         </div>

@@ -12,14 +12,24 @@ export default async function HomePage() {
     "now_playing"
   );
 
-  console.log(upcomingMovies);
-
   return (
     <div className=" max-w-[1440px] mx-auto">
       <MovieCarousel movies={nowPlayingMovies.results} />
-      <MovieContainer movies={upcomingMovies.results} title="Upcoming" />
-      <MovieContainer movies={popularMovies.results} title="Popular" />
-      <MovieContainer movies={topRatedMovies.results} title="Top Rated" />
+      <MovieContainer
+        movies={upcomingMovies.results}
+        title="Upcoming"
+        listName="upcoming"
+      />
+      <MovieContainer
+        movies={popularMovies.results}
+        title="Popular"
+        listName="popular"
+      />
+      <MovieContainer
+        movies={topRatedMovies.results}
+        title="Top Rated"
+        listName="top_rated"
+      />
     </div>
   );
 }

@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/carousel";
 import { movieResponseType, MovieType } from "@/types";
 import { Play } from "lucide-react";
-import TrailerPopover from "./TrailerPopover";
+
 import { getMoviesVideo } from "@/utils/get-data";
 
 type MovieCarouselProps = {
@@ -124,7 +124,6 @@ const MovieCarouselItem = ({ movie, index }: MovieCarouselItemProps) => {
               <div className="text-white text-xs font-normal leading-4 max-w-[500px]">
                 {movie.overview}
               </div>
-              /*{" "}
               <button className="bg-[#F4F4F5] border rounded-md h-10 px-4 py-2 w-[145px] flex gap-2 justify-center items-center">
                 <Play className="w-4 h-4 text-black" />
                 <span className="text-black leading-5 text-sm">

@@ -19,7 +19,7 @@ export const Header = () => {
           <input
             type="text"
             placeholder=" Search"
-            className="text-muted-foreground border border-gray-100 pl-9 w-[380px]"
+            className="text-muted-foreground border border-[#27272A] pl-9 w-[380px] radius rounded-lg"
           />
         </div>
       </div>

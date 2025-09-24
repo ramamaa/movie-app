@@ -1,6 +1,10 @@
-import { MovieCard } from "@/components/my";
-import { genresResponseType, movieResponseType } from "@/types";
-import { getMovieGenres, getMoviesByGenreId } from "@/utils/get-data";
+import { MovieCard, MovieContainer } from "@/components/my";
+import { genresResponseType, GenreType, movieResponseType } from "@/types";
+import {
+  getMovieGenres,
+  getMoviesByGenreId,
+  getMoviesList,
+} from "@/utils/get-data";
 import React from "react";
 import {
   Pagination,
@@ -12,39 +16,48 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-type GenrePageProps = {
-  searchParams: Promise<{ id: string; name: string }>;
+type SearchPageProps = {
+  searchParams: Promise<{ name: string; title: string }>;
 };
 
-const Genre = async ({ searchParams }: GenrePageProps) => {
+const SeeMore = async ({ searchParams }: SearchPageProps) => {
   const prams = await searchParams;
-  const id = prams.id;
-  const name = prams.name;
-  const filteredMoviesResponse: movieResponseType = await getMoviesByGenreId(
-    id
+  const listName = prams.name;
+  const title = prams.title;
+  const filteredMoviesResponse: movieResponseType = await getMoviesList(
+    listName
   );
+  console.log("filter", filteredMoviesResponse);
+
   // const genresResponse: genresResponseType = await getMovieGenres();
 
   return (
     <div className="max-w-[1440px] mx-auto">
-      <h2 className="text-foreground text-3xl font-semibold leading-9">
-        {name}
+      <h2 className="text-foreground text-3xl font-semibold leading-9 ml-20">
+        {title}
       </h2>
 
-      <div className="flex flex-wrap gap-12 my-8">
+      {/* <div className="flex flex-wrap gap-12 my-8">
+        <MovieContainer
+          movies={filteredMoviesResponse.results}
+          title={title}
+          listName={listName}
+        />
+      </div> */}
+      <div className="flex gap-8 flex-wrap px-20 mt-9">
         {filteredMoviesResponse.results.slice(0, 10).map((movie) => (
           <MovieCard
             id={movie.id}
+            key={movie.id}
             title={movie.title}
             score={movie.vote_average}
             image={movie.poster_path}
-            key={movie.id}
             className=""
           />
         ))}
       </div>
-      <Pagination>
-        <PaginationContent>
+      <Pagination className="mt-8 flex justify-end mr-20 h-10">
+        <PaginationContent className="mr-20">
           <PaginationItem>
             <PaginationPrevious href="#" />
           </PaginationItem>
@@ -71,4 +84,4 @@ const Genre = async ({ searchParams }: GenrePageProps) => {
   );
 };
 
-export default Genre;
+export default SeeMore;
