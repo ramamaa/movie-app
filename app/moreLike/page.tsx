@@ -1,39 +1,36 @@
-import { MovieCard } from "@/components/my";
-import { genresResponseType, movieResponseType } from "@/types";
-import { getMovieGenres, getMoviesByGenreId } from "@/utils/get-data";
-import React from "react";
+import { MovieCard } from "@/components/my/Moviecard";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-
-type GenrePageProps = {
-  searchParams: Promise<{ id: string; name: string; page: string }>;
+import { movieResponseType } from "@/types";
+import { getSimilarMovie } from "@/utils/get-data";
+import React from "react";
+type MoreLikeProps = {
+  searchParams: Promise<{ id: string; page: string }>;
 };
+const MoreLike = async ({ searchParams }: MoreLikeProps) => {
+  const params = await searchParams;
+  const id = params.id;
 
-const Genre = async ({ searchParams }: GenrePageProps) => {
-  const prams = await searchParams;
-  const id = prams.id;
-  const name = prams.name;
-  const page = prams.page || "1";
-  const filteredMoviesResponse: movieResponseType = await getMoviesByGenreId(
+  const page = params.page || "1";
+  const filteredMoviesResponse: movieResponseType = await getSimilarMovie(
     id,
     page
   );
   // genre?id=28&name=Action
-  const currentUrl = `genre?id=${id}&name=${name}`;
+  const currentUrl = `moreLike?id=${id}`;
   return (
     <div className="max-w-[1440px] mx-auto">
       <h2 className="text-foreground text-3xl font-semibold leading-9">
-        {name}
+        More Like This
       </h2>
 
-      <div className="flex flex-wrap gap-12 my-8">
+      <div className="flex flex-wrap gap-12 my-8 ">
         {filteredMoviesResponse.results.slice(0, 10).map((movie) => (
           <MovieCard
             id={movie.id}
@@ -87,4 +84,4 @@ const Genre = async ({ searchParams }: GenrePageProps) => {
   );
 };
 
-export default Genre;
+export default MoreLike;

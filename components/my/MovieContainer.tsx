@@ -1,3 +1,4 @@
+import { ChevronRight } from "lucide-react";
 import { MovieType } from "../../types";
 import { MovieCard } from "./Moviecard";
 type MovieContainerProps = {
@@ -18,8 +19,8 @@ export const MovieContainer = ({
           {title}
         </div>
         <a href={`/seemore?name=${listName}&title=${title}`}>
-          <button className="mt-13 pr-20 leading-5 text-sm font-medium ">
-            See more123
+          <button className="mt-13 pr-20 leading-5 text-sm font-medium flex gap-1 items-center">
+            See more <ChevronRight className="w-4 h-4" />
           </button>
         </a>
       </div>

@@ -1,6 +1,8 @@
-export const getMoviesList = async (listName: string) => {
+export const getMoviesList = async (listName: string, page?: string) => {
   const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${listName}?language=en-US&page=1`,
+    `https://api.themoviedb.org/3/movie/${listName}?language=en-US&page=${
+      page || 1
+    }`,
     {
       method: "GET",
       headers: {
@@ -28,9 +30,11 @@ export const getMovieGenres = async () => {
   return data;
 };
 
-export const getMoviesByGenreId = async (genreIds: string) => {
+export const getMoviesByGenreId = async (genreIds: string, page?: string) => {
   const res = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?language=en&with_genres=${genreIds}&page=${1}`,
+    `https://api.themoviedb.org/3/discover/movie?language=en&with_genres=${genreIds}&page=${
+      page || 1
+    }`,
     {
       method: "GET",
       headers: {
@@ -56,9 +60,11 @@ export const getMovieDetail = async (movieId: string) => {
   const data = await res.json();
   return data;
 };
-export const getMovieDetailActors = async (id: string) => {
+export const getMovieDetailActors = async (id: string, page?: string) => {
   const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`,
+    `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US&page=${
+      page || 1
+    }`,
     {
       method: "GET",
       headers: {
@@ -71,9 +77,11 @@ export const getMovieDetailActors = async (id: string) => {
   return data;
 };
 
-export const getSimilarMovie = async (id: string) => {
+export const getSimilarMovie = async (id: string, page?: string) => {
   const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1`,
+    `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=${
+      page || 1
+    }`,
     {
       method: "GET",
       headers: {
@@ -111,5 +119,24 @@ export const getMoviesID = async (movieId: string) => {
     }
   );
   const data = await res.json();
+  return data;
+};
+
+export const getSearchedMovies = async (searchValue: string, page?: string) => {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=en-US&page=${
+      page || 1
+    }`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY}`,
+      },
+    }
+  );
+  const data = await res.json();
+  console.log(data, "search");
+
   return data;
 };

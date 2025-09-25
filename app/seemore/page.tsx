@@ -17,19 +17,21 @@ import {
 } from "@/components/ui/pagination";
 
 type SearchPageProps = {
-  searchParams: Promise<{ name: string; title: string }>;
+  searchParams: Promise<{ name: string; title: string; page: string }>;
 };
 
 const SeeMore = async ({ searchParams }: SearchPageProps) => {
   const prams = await searchParams;
   const listName = prams.name;
   const title = prams.title;
+  const page = prams.page || "1";
   const filteredMoviesResponse: movieResponseType = await getMoviesList(
-    listName
+    listName,
+    page
   );
-  console.log("filter", filteredMoviesResponse);
+  //moreLike?id=129
 
-  // const genresResponse: genresResponseType = await getMovieGenres();
+  const currentUrl = `/seemore?name=${listName}&title=${title}`;
 
   return (
     <div className="max-w-[1440px] mx-auto">
@@ -37,13 +39,6 @@ const SeeMore = async ({ searchParams }: SearchPageProps) => {
         {title}
       </h2>
 
-      {/* <div className="flex flex-wrap gap-12 my-8">
-        <MovieContainer
-          movies={filteredMoviesResponse.results}
-          title={title}
-          listName={listName}
-        />
-      </div> */}
       <div className="flex gap-8 flex-wrap px-20 mt-9">
         {filteredMoviesResponse.results.slice(0, 10).map((movie) => (
           <MovieCard
@@ -59,24 +54,38 @@ const SeeMore = async ({ searchParams }: SearchPageProps) => {
       <Pagination className="mt-8 flex justify-end mr-20 h-10">
         <PaginationContent className="mr-20">
           <PaginationItem>
-            <PaginationPrevious href="#" />
+            <PaginationPrevious
+              href={`${currentUrl}&page=${Number(page) - 1}`}
+              aria-disabled={Number(page) <= 1}
+              tabIndex={Number(page) <= 1 ? -1 : undefined}
+              className={
+                Number(page) <= 1 ? "pointer-events-none opacity-50" : undefined
+              }
+            />
           </PaginationItem>
+          {page !== "1" && (
+            <>
+              <PaginationItem>
+                <PaginationLink href={`${currentUrl}&page=${Number(page) - 1}`}>
+                  {Number(page) - 1}
+                </PaginationLink>
+              </PaginationItem>
+            </>
+          )}
+
           <PaginationItem>
-            <PaginationLink href="#">1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" isActive>
-              2
+            <PaginationLink isActive href="#">
+              {page}
             </PaginationLink>
           </PaginationItem>
           <PaginationItem>
-            <PaginationLink href="#">3</PaginationLink>
+            <PaginationLink href={`${currentUrl}&page=${Number(page) + 1}`}>
+              {Number(page) + 1}
+            </PaginationLink>
           </PaginationItem>
+
           <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationNext href="#" />
+            <PaginationNext href={`${currentUrl}&page=${Number(page) + 1}`} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>

@@ -60,7 +60,7 @@ export async function NavigationMenuDemo() {
   console.log(genresResponse, "RESPONSE");
 
   return (
-    <NavigationMenu viewport={true}>
+    <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Genre</NavigationMenuTrigger>

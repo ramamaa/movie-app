@@ -180,7 +180,7 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
             </span>
             <a
               className="flex gap-2 text-sm text-foreground font-medium items-center px-4 leading-9"
-              href="/"
+              href={`/moreLike?id=${id}`}
             >
               See more <ChevronRight className="w-4 h-4" />
             </a>

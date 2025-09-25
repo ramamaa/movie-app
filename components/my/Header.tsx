@@ -1,5 +1,6 @@
 import { ThemeToggler, NavigationMenuDemo } from "@/components/my";
 import { Film, Search } from "lucide-react";
+import { SearchSection } from "../main/SearchSection";
 
 export const Header = () => {
   return (
@@ -16,11 +17,7 @@ export const Header = () => {
         <NavigationMenuDemo />
         <div className="relative flex gap-2.5">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <input
-            type="text"
-            placeholder=" Search"
-            className="text-muted-foreground border border-[#27272A] pl-9 w-[380px] radius rounded-lg"
-          />
+          <SearchSection />
         </div>
       </div>
       <ThemeToggler />
