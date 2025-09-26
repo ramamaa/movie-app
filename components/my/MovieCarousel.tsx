@@ -95,7 +95,7 @@ const MovieCarouselItem = ({ movie, index }: MovieCarouselItemProps) => {
 
   return (
     <CarouselItem>
-      <div className="p-1">
+      <div className="p-1 ">
         <Card className="rounded-none p-0">
           <CardContent className="relative flex aspect-video max-h-[600px] items-center justify-center p-0 rounded-none">
             <Image
