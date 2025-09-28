@@ -3,14 +3,8 @@
 import * as React from "react";
 import { Play } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,

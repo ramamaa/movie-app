@@ -1,17 +1,18 @@
 import { ThemeToggler, NavigationMenuDemo } from "@/components/my";
 import { Film, Search } from "lucide-react";
 import { SearchSection } from "../main/SearchSection";
+import Link from "next/link";
 
 export const Header = () => {
   return (
     <div className="flex justify-between items-center px-20 py-5 w-[1440px] mx-auto">
       <div className="flex gap-2">
-        <a href="/">
+        <Link href="/">
           <Film className="w-5 h-5 text-indigo-700" />
-        </a>
-        <a className="text-indigo-700 text-base font-bold" href="/">
+        </Link>
+        <Link className="text-indigo-700 text-base font-bold" href="/">
           Movie Z
-        </a>
+        </Link>
       </div>
       <div className="flex gap-3 items-center">
         <NavigationMenuDemo />

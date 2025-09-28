@@ -12,7 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { movieResponseType, MovieType } from "@/types";
+import { MovieType } from "@/types";
 import { Play } from "lucide-react";
 
 import { getMoviesVideo } from "@/utils/get-data";
@@ -48,8 +48,7 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
       <Carousel
         setApi={setApi}
         plugins={[autoplay.current]}
-        className="relative p-0 rounded-none"
-      >
+        className="relative p-0 rounded-none">
         <CarouselContent className="p-0 rounded-none">
           {movies.slice(0, 3).map((movie, index) => (
             <MovieCarouselItem movie={movie} index={index} key={movie.id} />
