@@ -26,11 +26,10 @@ export const MovieCard = ({
   className,
 }: MovieCardProps) => {
   return (
-    <div>
+    <div className="mx-auto">
       <Link href={`/detail/${id}`}>
         <Card
-          className={`w-[230px] bg-secondary p-0 overflow-hidden radius rounded-lg gap-2 ${className}`}
-        >
+          className={`w-[230px] bg-secondary p-0 overflow-hidden radius rounded-lg gap-2  ${className}`}>
           <CardContent className="p-0 object-cover ">
             <div className="aspect-[2/3] w-[100%] max-w-[200px] md:max-w-[290px] overflow-hidden rounded-t-lg relative">
               <Image

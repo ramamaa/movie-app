@@ -10,22 +10,21 @@ import {
   getMoviesVideo,
   getSimilarMovie,
 } from "@/utils/get-data";
-import { ChevronRight, CirclePlay, Play, Star } from "lucide-react";
+import { ChevronRight, Play, Star } from "lucide-react";
 import React from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { MovieCard, MovieContainer } from "@/components/my";
-import { TrailerDialog } from "@/components/my/TrailerDialog";
+import { MovieCard } from "@/components/my";
+
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+
 type DetailDynamicPageProps = {
   params: Promise<{ id: string }>;
 };
@@ -122,8 +121,7 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
               <Badge
                 variant="outline"
                 className="flex gap-2 cursor-pointer"
-                key={genre.id}
-              >
+                key={genre.id}>
                 <p>{genre.name}</p>
               </Badge>
             ))}
@@ -180,8 +178,7 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
             </span>
             <a
               className="flex gap-2 text-sm text-foreground font-medium items-center px-4 leading-9"
-              href={`/moreLike?id=${id}`}
-            >
+              href={`/moreLike?id=${id}`}>
               See more <ChevronRight className="w-4 h-4" />
             </a>
           </div>
@@ -193,8 +190,7 @@ const DetailDynamicPage = async ({ params }: DetailDynamicPageProps) => {
                 image={movie.poster_path}
                 id={movie.id}
                 key={movie.id}
-                className="w-[190px] "
-              ></MovieCard>
+                className="w-[190px] "></MovieCard>
             ))}
           </div>
         </div>

@@ -1,15 +1,10 @@
-import { MovieCard, MovieContainer } from "@/components/my";
-import { genresResponseType, GenreType, movieResponseType } from "@/types";
-import {
-  getMovieGenres,
-  getMoviesByGenreId,
-  getMoviesList,
-} from "@/utils/get-data";
+import { MovieCard } from "@/components/my";
+import { movieResponseType } from "@/types";
+import { getMoviesList } from "@/utils/get-data";
 import React from "react";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -29,7 +24,6 @@ const SeeMore = async ({ searchParams }: SearchPageProps) => {
     listName,
     page
   );
-  //moreLike?id=129
 
   const currentUrl = `/seemore?name=${listName}&title=${title}`;
 

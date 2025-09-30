@@ -1,11 +1,10 @@
 import { MovieCard } from "@/components/my";
-import { genresResponseType, movieResponseType } from "@/types";
-import { getMovieGenres, getMoviesByGenreId } from "@/utils/get-data";
+import { movieResponseType } from "@/types";
+import { getMoviesByGenreId } from "@/utils/get-data";
 import React from "react";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,

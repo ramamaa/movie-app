@@ -50,11 +50,10 @@ export const SearchSection = () => {
           <PopoverContent
             className={`flex flex-col justify-center bg-white dark:bg-[#09090B] border rounded-lg w-[577px] ${
               isOpen ? "" : "opacity-0"
-            } `}
-          >
+            } `}>
             {foundMovies?.results.slice(0, 5).map((movie) => {
               return (
-                <div key={movie.id} className="p-2 m-3">
+                <div key={movie.id} className="p-2 mx-3 mt-3">
                   <div className="w-[513px] h-[116px] flex gap-4">
                     <Image
                       src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
@@ -70,16 +69,20 @@ export const SearchSection = () => {
                           {movie.title}
                         </h1>
                         <div className="flex gap-1 items-center">
-                          <FaStar className="w-4 h-4" /> {movie.vote_average}/10
+                          <FaStar className="w-4 h-4" />{" "}
+                          {movie.vote_average.toFixed(1)}
+                          /10
                         </div>
                       </div>
                       <div className="flex justify-between">
                         <span className="leading-5 text-sm font-medium">
                           {movie.release_date.slice(0, 4)}
                         </span>
-                        <div className="flex items-center gap-1">
+                        <Link
+                          href={`/search?value=${searchValue}`}
+                          className="flex items-center gap-1">
                           See more <ArrowRight className="w-4 h-4" />
-                        </div>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -88,8 +91,11 @@ export const SearchSection = () => {
               );
             })}
             {isOpen && (
-              <Link href={`/search?value=${searchValue}`}>
-                See all results for {searchValue}
+              <Link
+                href={`/search?value=${searchValue}`}
+                className="flex items-center justify-start px-2 py-3 mb-3 ml-3 font-medium text-sm leading-5 text-foreground">
+                See all results for "
+                {searchValue.charAt(0).toUpperCase() + searchValue.slice(1)}"
               </Link>
             )}
           </PopoverContent>

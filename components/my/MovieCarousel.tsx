@@ -96,7 +96,7 @@ const MovieCarouselItem = ({ movie, index }: MovieCarouselItemProps) => {
     <CarouselItem>
       <div className="p-1 ">
         <Card className="rounded-none p-0">
-          <CardContent className="relative flex aspect-video max-h-[600px] items-center justify-center p-0 rounded-none">
+          <CardContent className="relative flex aspect-video max-h-[600px] items-center justify-center p-0 rounded-none ">
             <Image
               src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
               alt={movie.title}
@@ -108,7 +108,7 @@ const MovieCarouselItem = ({ movie, index }: MovieCarouselItemProps) => {
             />
 
             {/* overlay */}
-            <div className="flex flex-col gap-4 w-101 absolute left-[140px] bottom-[158px]">
+            <div className=" flex-col gap-4 w-101 absolute left-[140px] bottom-[158px] hidden md:flex ">
               <div>
                 <span className="text-white leading-6 font-normal text-base">
                   Now Playing:
