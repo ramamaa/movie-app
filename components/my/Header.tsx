@@ -14,7 +14,7 @@ export const Header = () => {
           Movie Z
         </Link>
       </div>
-      <div className="flex gap-3 items-center">
+      <div className="gap-3 items-center hidden md:flex">
         <NavigationMenuDemo />
         <div className="relative flex gap-2.5">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />

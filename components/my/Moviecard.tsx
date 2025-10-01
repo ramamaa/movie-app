@@ -29,16 +29,16 @@ export const MovieCard = ({
     <div className="mx-auto">
       <Link href={`/detail/${id}`}>
         <Card
-          className={`w-[230px] bg-secondary p-0 overflow-hidden radius rounded-lg gap-2  ${className}`}>
-          <CardContent className="p-0 object-cover ">
-            <div className="aspect-[2/3] w-[100%] max-w-[200px] md:max-w-[290px] overflow-hidden rounded-t-lg relative">
+          className={`w-[230px] bg-secondary p-0 overflow-hidden radius rounded-lg gap-2  ${className}`}
+        >
+          <CardContent className="p-0 aspect-[2/3]">
+            <div className="size-full rounded-t-lg relative">
               <Image
                 src={`https://image.tmdb.org/t/p/w500/${image}`}
                 alt="Poster"
                 fill
-                className="object-cover "
+                className="object-cover w-full h-full"
                 unoptimized
-                sizes="(max-width: 200px) 100vw, (max-width: 290px) 50vw, 33vw"
               />
             </div>
           </CardContent>
