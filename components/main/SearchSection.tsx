@@ -50,7 +50,8 @@ export const SearchSection = () => {
           <PopoverContent
             className={`flex flex-col justify-center bg-white dark:bg-[#09090B] border rounded-lg w-[577px] ${
               isOpen ? "" : "opacity-0"
-            } `}>
+            } `}
+          >
             {foundMovies?.results.slice(0, 5).map((movie) => {
               return (
                 <div key={movie.id} className="p-2 mx-3 mt-3">
@@ -80,7 +81,8 @@ export const SearchSection = () => {
                         </span>
                         <Link
                           href={`/search?value=${searchValue}`}
-                          className="flex items-center gap-1">
+                          className="flex items-center gap-1"
+                        >
                           See more <ArrowRight className="w-4 h-4" />
                         </Link>
                       </div>
@@ -93,9 +95,11 @@ export const SearchSection = () => {
             {isOpen && (
               <Link
                 href={`/search?value=${searchValue}`}
-                className="flex items-center justify-start px-2 py-3 mb-3 ml-3 font-medium text-sm leading-5 text-foreground">
-                See all results for "
-                {searchValue.charAt(0).toUpperCase() + searchValue.slice(1)}"
+                className="flex items-center justify-start px-2 py-3 mb-3 ml-3 font-medium text-sm leading-5 text-foreground"
+              >
+                See all results for &quot;
+                {searchValue.charAt(0).toUpperCase() + searchValue.slice(1)}
+                &quot;
               </Link>
             )}
           </PopoverContent>

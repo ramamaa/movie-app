@@ -48,7 +48,8 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
       <Carousel
         setApi={setApi}
         plugins={[autoplay.current]}
-        className="relative p-0 rounded-none">
+        className="relative p-0 rounded-none mx-auto"
+      >
         <CarouselContent className="p-0 rounded-none">
           {movies.slice(0, 3).map((movie, index) => (
             <MovieCarouselItem movie={movie} index={index} key={movie.id} />
@@ -94,21 +95,20 @@ const MovieCarouselItem = ({ movie, index }: MovieCarouselItemProps) => {
 
   return (
     <CarouselItem>
-      <div className="p-1 ">
+      <div className="p-1 mx-auto">
         <Card className="rounded-none p-0">
           <CardContent className="relative flex aspect-video max-h-[600px] items-center justify-center p-0 rounded-none ">
             <Image
               src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
               alt={movie.title}
-              width={1440}
-              height={600}
+              fill
               className="w-full h-full object-cover "
               priority={index === 0}
               unoptimized
             />
 
             {/* overlay */}
-            <div className=" flex-col gap-4 w-101 absolute left-[140px] bottom-[158px] hidden md:flex ">
+            <div className="flex flex-col gap-4 w-101 absolute left-[140px] bottom-[158px] invisible md:visible ">
               <div>
                 <span className="text-white leading-6 font-normal text-base">
                   Now Playing:

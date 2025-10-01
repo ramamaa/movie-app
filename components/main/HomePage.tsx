@@ -13,7 +13,7 @@ export default async function HomePage() {
   );
 
   return (
-    <div className=" max-w-[1440px] mx-auto">
+    <div className="max-w-360 mx-auto">
       <MovieCarousel movies={nowPlayingMovies.results} />
       <MovieContainer
         movies={upcomingMovies.results}
