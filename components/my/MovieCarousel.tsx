@@ -12,10 +12,19 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { MovieType } from "@/types";
+import { MovieType, TrailerResponseType } from "@/types";
 import { Play } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
-import { getMoviesVideo } from "@/utils/get-data";
+import { getMoviesVideo, getMovieTrailer } from "@/utils/get-data";
+import { TrailerDialog } from "./TrailerDialog";
 
 type MovieCarouselProps = {
   movies: MovieType[];
@@ -25,7 +34,6 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
 
-  //  Autoplay plugin
   const autoplay = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: false })
   );
@@ -33,13 +41,11 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
   React.useEffect(() => {
     if (!api) return;
 
-    // Update current slide on select
     setCurrent(api.selectedScrollSnap() + 1);
     api.on("select", () => {
       setCurrent(api.selectedScrollSnap() + 1);
     });
 
-    // Clean up on unmount
     return () => autoplay.current?.destroy();
   }, [api]);
 
@@ -48,8 +54,7 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
       <Carousel
         setApi={setApi}
         plugins={[autoplay.current]}
-        className="relative p-0 rounded-none mx-auto"
-      >
+        className="relative p-0 rounded-none mx-auto">
         <CarouselContent className="p-0 rounded-none">
           {movies.slice(0, 3).map((movie, index) => (
             <MovieCarouselItem movie={movie} index={index} key={movie.id} />
@@ -59,7 +64,6 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
         <CarouselNext className="right-13" />
       </Carousel>
 
-      {/* indicators */}
       <div className="relative flex gap-2 justify-center mt-[-50px]">
         {Array.from({ length: 3 }).map((_, index) => (
           <div
@@ -75,22 +79,26 @@ export function MovieCarousel({ movies }: MovieCarouselProps) {
   );
 }
 
-type MovieCarouselItemProps = {
+const MovieCarouselItem = ({
+  movie,
+  index,
+}: {
   movie: MovieType;
   index: number;
-};
+}) => {
+  const [trailerKey, setTrailerKey] = React.useState("");
 
-const MovieCarouselItem = ({ movie, index }: MovieCarouselItemProps) => {
-  const [movieTrailer, setMovieTrailer] = React.useState("");
+  const getTrailerData = async () => {
+    const trailerData: TrailerResponseType = await getMovieTrailer(
+      movie.id.toString()
+    );
 
-  const getMovieTrailer = async () => {
-    const trailerData = await getMoviesVideo(movie.id);
-    console.log("trailer", trailerData);
-    setMovieTrailer(trailerData);
+    const trailer = trailerData.results.find((item) => item.type === "Trailer");
+    setTrailerKey(trailer?.key || "");
   };
 
   React.useEffect(() => {
-    getMovieTrailer();
+    getTrailerData();
   }, []);
 
   return (
@@ -107,7 +115,6 @@ const MovieCarouselItem = ({ movie, index }: MovieCarouselItemProps) => {
               unoptimized
             />
 
-            {/* overlay */}
             <div className="flex flex-col gap-4 w-101 absolute left-[140px] bottom-[158px] invisible md:visible ">
               <div>
                 <span className="text-white leading-6 font-normal text-base">
@@ -123,13 +130,26 @@ const MovieCarouselItem = ({ movie, index }: MovieCarouselItemProps) => {
               <div className="text-white text-xs font-normal leading-4 max-w-[500px]">
                 {movie.overview}
               </div>
-              <button className="bg-[#F4F4F5] border rounded-md h-10 px-4 py-2 w-[145px] flex gap-2 justify-center items-center">
-                <Play className="w-4 h-4 text-black" />
-                <span className="text-black leading-5 text-sm">
-                  Watch Trailer
-                </span>
-              </button>
-              {/* <TrailerPopover /> */}
+
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button className="bg-[#F4F4F5] border rounded-md h-10 px-4 py-2 w-[145px] flex gap-2 justify-center items-center">
+                    <Play className="w-4 h-4 text-black" />
+                    <span className="text-black leading-5 text-sm">
+                      Watch Trailer
+                    </span>
+                  </button>
+                </DialogTrigger>
+
+                <DialogContent className="sm:min-w-[997px] min-w-full sm:min-h-[561px] min-h-full p-0 border-none bg-black rounded-none flex justify-center items-center gap-0">
+                  <DialogTitle className="hidden bg-black" />
+                  <iframe
+                    src={`//www.youtube-nocookie.com/embed/${trailerKey}`}
+                    allowFullScreen
+                    className="sm:w-[997px] min-w-full sm:h-[561px] aspect-[16/9] bg-black"
+                  />
+                </DialogContent>
+              </Dialog>
             </div>
           </CardContent>
         </Card>
