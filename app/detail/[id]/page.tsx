@@ -10,7 +10,7 @@ import {
   getMoviesVideo,
   getSimilarMovie,
 } from "@/utils/get-data";
-import { ChevronRight, Play, Star } from "lucide-react";
+import { ChevronRight, Star } from "lucide-react";
 import React from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";

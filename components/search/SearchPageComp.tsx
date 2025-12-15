@@ -59,7 +59,8 @@ export const SearchPageComp = async ({ searchParams }: SearchPageCompProps) => {
             <ResizablePanel collapsible>
               <div className="flex flex-col gap-8">
                 <h4 className="text-xl leading-7 font-semibold text-foreground">
-                  {resultNumber.toLocaleString("en")} results for "{value}"{" "}
+                  {resultNumber.toLocaleString("en")} results for `&quot;`
+                  {value}`&quot;`{" "}
                   {genreId &&
                     movieGenresList.genres
                       .filter((genre) => genre.id === Number(genreId))
