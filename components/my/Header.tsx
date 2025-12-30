@@ -1,7 +1,8 @@
-import { ThemeToggler, NavigationMenuDemo } from "@/components/my";
+import { NavigationMenuDemo } from "@/components/my";
 import { Film, Search } from "lucide-react";
 import { SearchSection } from "../main/SearchSection";
 import Link from "next/link";
+import { AnimatedThemeToggler } from "../ui/animated-theme-toggler";
 
 export const Header = () => {
   return (
@@ -21,7 +22,8 @@ export const Header = () => {
           <SearchSection />
         </div>
       </div>
-      <ThemeToggler />
+
+      <AnimatedThemeToggler />
     </div>
   );
 };
